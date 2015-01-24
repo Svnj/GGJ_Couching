@@ -18,6 +18,11 @@ public class Player : MonoBehaviour {
 		cards.Add(card);
 	}
 
+	public void PlayCard()
+	{
+		cards[0].Play();
+	}
+
 	// Use this for initialization
 	void Start () {
 	

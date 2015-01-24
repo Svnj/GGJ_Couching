@@ -15,6 +15,7 @@ public class Table : MonoBehaviour
 		if(sizeOnBillsSide < Mathf.Abs(remotePosition))
 		{
 			//TODO Game over
+			Debug.Log ("Game over");
 		}
 	}
 
@@ -25,6 +26,7 @@ public class Table : MonoBehaviour
 		if(sizeOnBobsSide < Mathf.Abs(remotePosition))
 		{
 			//TODO Game over
+			Debug.Log ("Game over");
 		}
 	}
 
@@ -41,6 +43,7 @@ public class Table : MonoBehaviour
 		if(sizeOnBillsSide < Mathf.Abs(remotePosition) || sizeOnBobsSide < Mathf.Abs(remotePosition))
 		{
 			//TODO Game over
+			Debug.Log ("Game over");
 		}
 
 	}

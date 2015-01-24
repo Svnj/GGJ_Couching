@@ -12,9 +12,9 @@ public static class Fortuneteller
 		return stone;
 	}
 
-	public static int ReadTheSigns(int p,int r,int f)
+	public static int ReadTheSigns(int p,int r, int s, int f)
 	{
-		if(p+r+f != 100)
+		if(p+r+s+f != 100)
 			return -1;
 
 		int stone = ThrowStonesOfDestiny();
@@ -27,9 +27,13 @@ public static class Fortuneteller
 		{
 			return 1;
 		}
-		else
+		else if(stone < p + r + s)
 		{
 			return 2;
+		}
+		else
+		{
+			return 3;
 		}
 	}
 

@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 414436}
+  - 114: {fileID: 11451102}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -22,11 +23,36 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.1013002, y: 2.25295138, z: 14.9572048}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11451102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66be63436f537b742832f893eb2dc295, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardName: 
+  power: 
+  risk: 
+  fail: 
+  powerEff: 0
+  riskEff: 0
+  specialEff: 0
+  failEff: 0
+  p: 100
+  r: 0
+  s: 0
+  f: 0
+  moveDist: 1
+  waitTurns: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
