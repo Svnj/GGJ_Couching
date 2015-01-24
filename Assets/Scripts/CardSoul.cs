@@ -14,6 +14,8 @@ public class CardSoul : MonoBehaviour {
 
 	protected int p = 1,r = 0,f = 0;
 
+	protected int moveDist = 1;
+
 	protected Effect activeEffect = Effect.NONE;
 
 
