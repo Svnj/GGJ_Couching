@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
-	public int numOfTurnsLeft;
+	public int numOfTurnsLeft = 1;
 
 	List<CardSoul> cards;
  
@@ -13,23 +13,34 @@ public class Player : MonoBehaviour {
 		cards = new List<CardSoul>();
 	}
 
+	
+	public int GetNumberOfCards()
+	{
+		return cards.Count;
+	}
+
 	public void ReceiveCard(CardSoul card)
 	{
 		cards.Add(card);
 	}
 
-	public void PlayCard()
+	public void DropCard(CardSoul card)
 	{
-		cards[0].Play();
+		//Debug.Log("drop " + card);
+		card.gameObject.SetActive(false);
+		cards.Remove(card);
 	}
 
-	// Use this for initialization
-	void Start () {
-	
+	public CardSoul GetRandomCard()
+	{
+		if (cards.Count < 1)
+		{
+			return null;
+		}
+		int randomIndex = Fortuneteller.GiveItToMeRandom(cards.Count);
+		CardSoul yourChosenCard = cards[randomIndex];
+		cards.RemoveAt(randomIndex);
+		return yourChosenCard;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }

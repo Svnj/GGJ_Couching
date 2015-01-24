@@ -18,6 +18,12 @@ public class CardPool : MonoBehaviour
 
 	public CardSoul GetCard()
 	{
+		if (cards.Count < 1)
+		{
+			//TODO game over
+			Debug.Log ("game over");
+			return null;
+		}
 		int randomIndex = Fortuneteller.GiveItToMeRandom(cards.Count);
 		CardSoul yourNewCard = cards[randomIndex];
 		cards.RemoveAt(randomIndex);

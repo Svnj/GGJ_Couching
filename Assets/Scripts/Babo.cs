@@ -10,6 +10,8 @@ public class Babo : MonoBehaviour
 	[SerializeField] private CardPool couch = null;
 	[SerializeField] private Table table = null;
 
+	public bool KIisPlaying;
+
 
 	// Use this for initialization
 	void Start ()
@@ -39,33 +41,78 @@ public class Babo : MonoBehaviour
 		CardSoul.OnNewCard += GiveCard;
 
 		CardSoul.OnClick += CardClick;
+		CardSoul.OnCardPlayed += DropPlayedCard;
 	}
 
 	public void CardClick(CardSoul card)
-	{
-		if(activePlayer.numOfTurnsLeft == 0)
+	{		
+
+		if(KIisPlaying)
 		{
-			SwitchPlayer();
+			activePlayer.GetRandomCard().Play();
+		}
+		else
+		{
+			card.Play();
 		}
 
-		card.Play();
 		activePlayer.numOfTurnsLeft--;
 		if(activePlayer.numOfTurnsLeft < 0)
 		{
 			activePlayer.numOfTurnsLeft = 0;
 		}
+
+		// switch to KI
+//		if(activePlayer == Bill && activePlayer.numOfTurnsLeft == 0)
+//		{
+//			SwitchPlayer();
+//		}
+
+		if(activePlayer.GetNumberOfCards() == 0)
+		{
+			Debug.Log( activePlayer + "take card on empty hand");
+			activePlayer.ReceiveCard(couch.GetCard());
+			activePlayer.numOfTurnsLeft = 0;
+		}
+
+		if(activePlayer.numOfTurnsLeft == 0)
+		{
+			SwitchPlayer();
+			if(activePlayer == Bob)
+			{
+				KIisPlaying = true;
+				StartCoroutine( "Wait");
+			}
+			else
+			{
+				KIisPlaying = false;
+			}
+		}
 	}
 
+	IEnumerator Wait() {
+		yield return new WaitForSeconds(1f);
+		CardClick(null);
+	}
+	
 	public void SwitchPlayer()
 	{
 		if(activePlayer == Bill)
 		{
 			activePlayer = Bob;
+			Bob.numOfTurnsLeft = 1;
 		}
 		else
 		{
 			activePlayer = Bill;
+			Bill.numOfTurnsLeft = 1;
 		}
+	}
+
+	public void DropPlayedCard(CardSoul card)
+	{
+		//Debug.Log( activePlayer + "Drop Card");
+		activePlayer.DropCard(card);
 	}
 
 	public void DoNothing ()
@@ -158,12 +205,6 @@ public class Babo : MonoBehaviour
 				Bob.ReceiveCard(couch.GetCard());
 			}
 		}
-	}
-
-
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
 

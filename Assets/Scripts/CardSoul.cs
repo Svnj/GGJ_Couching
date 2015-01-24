@@ -11,10 +11,12 @@ public class CardSoul : MonoBehaviour, IPointerDownHandler
 	public delegate void PlayAction();
 	public delegate void PlayActionWithParam(int i);
 	public delegate void ClickAction(CardSoul card);
+	public delegate void DropAction(CardSoul card);
 	public event PlayAction _currentEvent;
 	public event PlayActionWithParam _currentEventParam;
 
 	public static event ClickAction OnClick;
+	public static event DropAction OnCardPlayed;
 
 	public static event PlayAction OnDoNothing;
 	public static event PlayAction OnCutTable;
@@ -29,6 +31,7 @@ public class CardSoul : MonoBehaviour, IPointerDownHandler
 	public void DoSomething(){ if(_currentEvent != null) _currentEvent();}
 	public void DoSomethingWithParam(int i){ if(_currentEventParam != null) _currentEventParam(i);}
 	public void Click(){if(OnClick!=null) OnClick(this);}
+	public void Drop(){if(OnCardPlayed!=null) OnCardPlayed(this);}
 
 	#endregion
 
@@ -125,5 +128,8 @@ public class CardSoul : MonoBehaviour, IPointerDownHandler
 		}
 
 		DoSomething();
+
+		// put played card away
+		Drop();
 	}
 }
