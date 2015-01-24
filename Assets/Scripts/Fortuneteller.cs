@@ -33,4 +33,11 @@ public static class Fortuneteller
 		}
 	}
 
+	public static int GiveItToMeRandom(int max)
+	{
+		int stone = rand.Next(max);
+		
+		return stone;
+	}
+
 }

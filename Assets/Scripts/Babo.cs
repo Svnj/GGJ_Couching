@@ -3,13 +3,20 @@ using System.Collections;
 
 public class Babo : MonoBehaviour
 {
-	int activePlayer;
+	public Player Bill;
+	public Player Bob;
+	Player activePlayer;
 
 
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start ()
+	{
+		//TODO make starting player random
+		activePlayer = Bill;
+
+		Bill.GetReady();
+		Bob.GetReady();
 	}
 	
 	// Update is called once per frame
