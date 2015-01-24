@@ -12,9 +12,10 @@ public class CardSoul : MonoBehaviour {
 	protected Effect riskEff = Effect.NONE;
 	protected Effect failEff = Effect.NONE;
 
-	protected int p = 1,r = 0,f = 0;
+	protected int p = 1,r = 0, s = 0,f = 0;
 
 	protected int moveDist = 1;
+	protected int waitTurns = 1;
 
 	protected Effect activeEffect = Effect.NONE;
 
@@ -26,7 +27,9 @@ public class CardSoul : MonoBehaviour {
 			PLAY_AGAIN,
 			MOVE_REMOTE,
 			GAME_OVER,
-			CUT_TABLE
+			CUT_TABLE,
+			WAIT,
+			FIX_TABLE
 		}
 
 	// Use this for initialization

@@ -4,20 +4,19 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
-	int numOfTurnsLeft;
+	public int numOfTurnsLeft;
 
-	IList<CardSoul> cards;
-
-	public CardPool couch;
+	List<CardSoul> cards;
  
 	public void GetReady()
 	{
-		for(int i = 0; i<3; i++)
-		{
-			cards.Add(couch.GetCard());
-		}
+		cards = new List<CardSoul>();
 	}
 
+	public void ReceiveCard(CardSoul card)
+	{
+		cards.Add(card);
+	}
 
 	// Use this for initialization
 	void Start () {

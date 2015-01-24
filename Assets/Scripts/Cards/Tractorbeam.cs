@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Tractor beam : CardSoul {
+public class TractorBeam : CardSoul {
 
 	void Start()
 	{

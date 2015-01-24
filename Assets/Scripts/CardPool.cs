@@ -4,12 +4,16 @@ using System.Collections.Generic;
 
 public class CardPool : MonoBehaviour
 {
-	private IList<CardSoul> cards;
+	[SerializeField] private List<CardSoul> cards;
 
 
 	void Awake()
 	{
-		cards = GetComponents<CardSoul>();
+		cards = new List<CardSoul>();
+		foreach(CardSoul card in GetComponentsInChildren<CardSoul>())
+		{
+			cards.Add(card);
+		}
 	}
 
 	public CardSoul GetCard()

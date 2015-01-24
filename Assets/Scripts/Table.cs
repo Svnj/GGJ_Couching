@@ -28,6 +28,35 @@ public class Table : MonoBehaviour
 		}
 	}
 
+	public void CutMeDown(bool BillsSide)
+	{
+		if(BillsSide)
+		{
+			sizeOnBillsSide--;
+		}
+		else
+		{
+			sizeOnBobsSide--;
+		}
+		if(sizeOnBillsSide < Mathf.Abs(remotePosition) || sizeOnBobsSide < Mathf.Abs(remotePosition))
+		{
+			//TODO Game over
+		}
+
+	}
+
+	public void TapeMeUp(bool BillsSide)
+	{
+		if(BillsSide)
+		{
+			sizeOnBillsSide++;
+		}
+		else
+		{
+			sizeOnBobsSide++;
+		}		
+	}
+
 
 	// Use this for initialization
 	void Start () {

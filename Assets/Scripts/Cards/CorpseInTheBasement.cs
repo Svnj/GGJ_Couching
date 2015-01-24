@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Corpse in the basement : CardSoul {
+public class CorpseInTheBasement : CardSoul {
 
 	void Start()
 	{
