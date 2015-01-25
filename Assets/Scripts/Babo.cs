@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Babo : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class Babo : MonoBehaviour
 
 	public bool KIisPlaying;
 
+	public Text comment;
+	public Text description;
+
+	public bool gameOver;
 
 	// Use this for initialization
 	void Start ()
@@ -26,8 +31,8 @@ public class Babo : MonoBehaviour
 		// give starting cards
 		for(int i = 0; i<3; i++)
 		{
-			Bill.ReceiveCard(couch.GetCard());
-			Bob.ReceiveCard(couch.GetCard());
+			Bill.ReceiveCard(couch.GetCard(), true);
+			Bob.ReceiveCard(couch.GetCard(), false);
 		}
 
 		// listen to card events
@@ -42,6 +47,15 @@ public class Babo : MonoBehaviour
 
 		CardSoul.OnClick += CardClick;
 		CardSoul.OnCardPlayed += DropPlayedCard;
+		CardSoul.OnMouseHover += ShowCardDescription;
+
+		Table.OnGameOver += GameOver;
+		CardPool.OnGameOver += GameOver;
+	}
+
+	public void ShowCardDescription(CardSoul card)
+	{
+		description.text = card.cardName;
 	}
 
 	public void CardClick(CardSoul card)
@@ -49,12 +63,12 @@ public class Babo : MonoBehaviour
 
 		if(KIisPlaying)
 		{
-			activePlayer.GetRandomCard().Play();
-		}
-		else
-		{
+			card = activePlayer.GetRandomCard();
 			card.Play();
 		}
+
+		card.Play();
+
 
 		activePlayer.numOfTurnsLeft--;
 		if(activePlayer.numOfTurnsLeft < 0)
@@ -71,7 +85,7 @@ public class Babo : MonoBehaviour
 		if(activePlayer.GetNumberOfCards() == 0)
 		{
 			Debug.Log( activePlayer + "take card on empty hand");
-			activePlayer.ReceiveCard(couch.GetCard());
+			activePlayer.ReceiveCard(couch.GetCard(), activePlayer==Bill);
 			activePlayer.numOfTurnsLeft = 0;
 		}
 
@@ -199,17 +213,20 @@ public class Babo : MonoBehaviour
 		{
 			for(int i=0; i<count; i++)
 			{
-				Bill.ReceiveCard(couch.GetCard());
+				Bill.ReceiveCard(couch.GetCard(),true);
 			}
 		}
 		else
 		{
 			for(int i=0; i<count; i++)
 			{
-				Bob.ReceiveCard(couch.GetCard());
+				Bob.ReceiveCard(couch.GetCard(),false);
 			}
 		}
 	}
 
-
+	public void GameOver()
+	{
+		comment.text = "Game over!!!";
+	}
 }

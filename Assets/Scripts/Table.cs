@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class Table : MonoBehaviour
 {
+	public delegate void GameOverAction();
+	public static event GameOverAction OnGameOver;
+	
+	public void GameOver(){if(OnGameOver!=null) OnGameOver();}
+
 	int sizeOnBillsSide = 5; // he has the negative side
 	int sizeOnBobsSide = 5;
 
@@ -24,6 +29,7 @@ public class Table : MonoBehaviour
 		{
 			//TODO Game over
 			Debug.Log ("Game over");
+			GameOver();
 		}
 	}
 
@@ -36,6 +42,7 @@ public class Table : MonoBehaviour
 		{
 			//TODO Game over
 			Debug.Log ("Game over");
+			GameOver();
 		}
 	}
 

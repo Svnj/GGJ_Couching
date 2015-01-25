@@ -9,6 +9,7 @@ public class CardSoul : MonoBehaviour, IPointerDownHandler
 	#region events
 
 	public delegate void PlayAction();
+	public delegate void MouseAction(CardSoul card);
 	public delegate void PlayActionWithParam(int i);
 	public delegate void ClickAction(CardSoul card);
 	public delegate void DropAction(CardSoul card);
@@ -17,6 +18,7 @@ public class CardSoul : MonoBehaviour, IPointerDownHandler
 
 	public static event ClickAction OnClick;
 	public static event DropAction OnCardPlayed;
+	public static event MouseAction OnMouseHover;
 
 	public static event PlayAction OnDoNothing;
 	public static event PlayAction OnCutTable;
@@ -32,12 +34,13 @@ public class CardSoul : MonoBehaviour, IPointerDownHandler
 	public void DoSomethingWithParam(int i){ if(_currentEventParam != null) _currentEventParam(i);}
 	public void Click(){if(OnClick!=null) OnClick(this);}
 	public void Drop(){if(OnCardPlayed!=null) OnCardPlayed(this);}
+	public void MouseHover(){if(OnMouseHover!=null) OnMouseHover(this);}
 
 	#endregion
 
 	#region attributes
 
-	[SerializeField] protected string cardName;
+	[SerializeField] public string cardName;
 	[SerializeField] protected string power;
 	[SerializeField] protected string risk;
 	[SerializeField] protected string fail;
@@ -86,6 +89,11 @@ public class CardSoul : MonoBehaviour, IPointerDownHandler
 
 	void OnMouseDown() {
 		Click();
+	}
+
+	void OnMouseOver()
+	{
+		MouseHover();
 	}
 
 	public void OnPointerDown(PointerEventData eventData)
