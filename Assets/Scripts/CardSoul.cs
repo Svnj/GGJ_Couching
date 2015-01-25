@@ -74,8 +74,8 @@ public class CardSoul : MonoBehaviour, IPointerDownHandler
 	// Use this for initialization
 	void Start ()
 	{ 
-		Text text = GetComponent<Text>();
-		text.text = cardName;
+//		Text text = GetComponent<Text>();
+//		text.text = cardName;
 	}
 
 	public void Play()
@@ -84,9 +84,14 @@ public class CardSoul : MonoBehaviour, IPointerDownHandler
 		MakeItHappen();
 	}
 
+	void OnMouseDown() {
+		Click();
+	}
+
 	public void OnPointerDown(PointerEventData eventData)
 	{
-		Click();
+//		Click();
+//		Debug.Log("click");
 	}
 
 	protected virtual void WhatHappens()

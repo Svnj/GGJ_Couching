@@ -88,6 +88,10 @@ public class Babo : MonoBehaviour
 				KIisPlaying = false;
 			}
 		}
+//		if(KIisPlaying && activePlayer.numOfTurnsLeft > 0)
+//		{
+//			StartCoroutine( "Wait");
+//		}
 	}
 
 	IEnumerator Wait() {

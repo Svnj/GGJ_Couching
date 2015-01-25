@@ -1,18 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Table : MonoBehaviour
 {
 	int sizeOnBillsSide = 5; // he has the negative side
 	int sizeOnBobsSide = 5;
 
-	int remotePosition = 0;
+	public GameObject remote;
+	int remotePosition = 5;
+	float widthOfPiece = 0.09f;
+
+	public GameObject[] pieces;
+	int leftCutIndex = 10;
+	int rightCutIndex = 0;
 
 	public void MoveToBill(int dist)
 	{
-		remotePosition -= dist;
+		remotePosition += dist;
+		remote.transform.localPosition -= new Vector3(widthOfPiece,0,0);
 
-		if(sizeOnBillsSide < Mathf.Abs(remotePosition))
+		if(leftCutIndex < remotePosition)
 		{
 			//TODO Game over
 			Debug.Log ("Game over");
@@ -21,9 +29,10 @@ public class Table : MonoBehaviour
 
 	public void MoveToBob(int dist)
 	{
-		remotePosition += dist;
+		remotePosition -= dist;
+		remote.transform.localPosition += new Vector3(widthOfPiece,0,0);
 		
-		if(sizeOnBobsSide < Mathf.Abs(remotePosition))
+		if(rightCutIndex > remotePosition)
 		{
 			//TODO Game over
 			Debug.Log ("Game over");
@@ -35,12 +44,16 @@ public class Table : MonoBehaviour
 		if(BillsSide)
 		{
 			sizeOnBillsSide--;
+			pieces[leftCutIndex].SetActive(false);
+			leftCutIndex--;
 		}
 		else
 		{
 			sizeOnBobsSide--;
+			pieces[rightCutIndex].SetActive(false);
+			rightCutIndex++;
 		}
-		if(sizeOnBillsSide < Mathf.Abs(remotePosition) || sizeOnBobsSide < Mathf.Abs(remotePosition))
+		if(leftCutIndex < remotePosition || rightCutIndex > remotePosition)
 		{
 			//TODO Game over
 			Debug.Log ("Game over");
@@ -52,22 +65,25 @@ public class Table : MonoBehaviour
 	{
 		if(BillsSide)
 		{
-			sizeOnBillsSide++;
+			if(sizeOnBobsSide < 5)
+			{
+				sizeOnBobsSide++;
+				pieces[--rightCutIndex].SetActive(true);
+			}
 		}
 		else
 		{
-			sizeOnBobsSide++;
+			if(sizeOnBillsSide < 5)
+			{
+				sizeOnBillsSide++;
+				pieces[++leftCutIndex].SetActive(true);
+			}
 		}		
 	}
 
-
-	// Use this for initialization
-	void Start () {
-	
+	void Start()
+	{
+//		remote.transform.localPosition += new Vector3(widthOfPiece*5,0,0);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
